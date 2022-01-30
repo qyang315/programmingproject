@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </head>
+   <body>      
+
+
+    <form action = "" method = "get">
+         
+    <h1 style="font-family:Tahoma;text-align:center;font-size:300%">Meme Fetcher</h1>
+
+    <p style="text-align:center;font-size:120%">Click the button below to fetch random memes</p>
+
+    <p align="center"><input type="button" onclick="return fetchMeme()" value = "FETCH" /></p>
+
+    <img id="img" >
+
+
+      </form>      
+
+      <script>
+
+
+        let fetchMeme = function () {
+            let url = 'http://34.125.171.223:5000/givememe';
+            fetch(url, {
+                method: 'GET', // *GET, POST, PUT, DELETE, etc.
+                mode: 'cors', // no-cors, *cors, same-origin
+                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                credentials: 'same-origin', // include, *same-origin, omit
+                headers: {
+                'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                redirect: 'follow', // manual, *follow, error
+                referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+
+            }).then(data=>data.json()).then(
+                data=>{
+                    console.log(data)
+                    let img = document.getElementById("img");
+                    img.src = data.Url;
+                }
+            ).catch(()=>{
+                alert("Damn! Your internet speed is too slow... Please try again")
+            });
+        }
+
+    </script>
+   </body>
+</html>
